@@ -1,4 +1,47 @@
-# tree-sitter-python
+# tree-sitter-myth
+
+This is the Myth language Grammar for tree-sitter
+The grammar is forked from the python grammar as it is mostly simmilar with the python grammar, 
+main differences are:
+- when atributinh = is copy := is pass by reference
+a = 5
+b = a
+b += 1
+print(a) // gives 5
+print(b) // gives 6
+
+a = 5
+b := a
+b += 1
+print(a) // gives 6
+print(b) // gives 6
+
+In this way it is more clear what is copied and not.
+
+Myth will for now not support classes and instead will gave structs that can have appended fucntions
+
+struct something:
+  x : Int
+  y : Uint
+  c : String
+  def valid_somthing():
+    etc
+
+List compreension has the regular contructs syntaxes:
+[x for x in range(10)] is intead written as
+[ for x in range(10): x] // This is clearer as it has the same syntax as regular code
+and more generagl
+[ 0, for x in range(1:10): x , 24]
+and for double
+[for x in range(10): for y in range(20): (x,y)] 
+[for x in range(10): 
+  for y in range(20): 
+    (x,y)]
+
+Heavy support for types as myth is static types and anotation language for refined specificaions also supporting refined types 
+
+
+# Credits of the original python grammar too:
 
 [![CI][ci]](https://github.com/tree-sitter/tree-sitter-python/actions/workflows/ci.yml)
 [![discord][discord]](https://discord.gg/w7nTvsVJhm)
