@@ -1,0 +1,179 @@
+================================================================================
+Simple Types
+================================================================================
+
+def sum(x: Int, u:Uint):
+  return x+u
+
+--------------------------------------------------------------------------------
+(module
+      (function_definition
+        (identifier)
+        (parameters
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)))
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name))))
+        (block
+          (return_statement
+            (binary_operator
+              (identifier)
+              (identifier))))))
+
+================================================================================
+Types are upper case
+================================================================================
+
+def sum(x: int, u: Uint):
+  return x+u
+
+--------------------------------------------------------------------------------
+    (module
+      (function_definition
+        (identifier)
+        (parameters
+          (ERROR
+            (identifier))
+          (identifier)
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name))))
+        (block
+          (return_statement
+            (binary_operator
+              (identifier)
+              (identifier))))))
+
+================================================================================
+Type refinements
+================================================================================
+
+def sum(x: Nat{self>10}, u: Int):
+  return x+u
+
+--------------------------------------------------------------------------------
+    (module
+      (function_definition
+        (identifier)
+        (parameters
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_refinement
+                (comparison_operator
+                  (identifier)
+                  (integer)))))
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name))))
+        (block
+          (return_statement
+            (binary_operator
+              (identifier)
+              (identifier))))))
+
+================================================================================
+Type parameters
+================================================================================
+
+def sum(x: Nat(x), u: SomeIndexedType(u)):
+  return x+u
+
+-------------------------------------------------------------------------------
+(module
+      (function_definition
+        (identifier)
+        (parameters
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_arguments
+                (parameters
+                  (identifier)))))
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_arguments
+                (parameters
+                  (identifier))))))
+        (block
+          (return_statement
+            (binary_operator
+              (identifier)
+              (identifier))))))
+
+================================================================================
+Type refinements and type parameters
+================================================================================
+
+def sum(x: Nat(x){self>3}, u: SomeIndexedType(u){isBool(u)}):
+  return x+u
+
+------------------------------------------------------------------------------
+(module
+      (function_definition
+        (identifier)
+        (parameters
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_arguments
+                (parameters
+                  (identifier)))
+              (type_refinement
+                (comparison_operator
+                  (identifier)
+                  (integer)))))
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_arguments
+                (parameters
+                  (identifier)))
+              (type_refinement
+                (call
+                  (identifier)
+                  (argument_list
+                    (identifier)))))))
+        (block
+          (return_statement
+            (binary_operator
+              (identifier)
+              (identifier))))))
+
+================================================================================
+Type parameters can receive a Type 
+================================================================================
+
+def sum(x: List(Int : Type)):
+  return x
+
+------------------------------------------------------------------------------
+(module
+      (function_definition
+        (identifier)
+        (parameters
+          (typed_parameter
+            (identifier)
+            (type
+              (type_name)
+              (type_arguments
+                (parameters
+                  (typed_parameter
+                    (identifier)
+                    (type
+                      (type_name))))))))
+        (block
+          (return_statement
+            (identifier)))))

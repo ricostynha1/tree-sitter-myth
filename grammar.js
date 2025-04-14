@@ -53,7 +53,6 @@ module.exports = grammar({
     [$.with_item, $._collection_elements],
     [$.named_expression, $.as_pattern],
     [$.print_statement, $.primary_expression],
-    [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
   ],
 
@@ -942,14 +941,34 @@ module.exports = grammar({
       field('type', $.type),
     )),
 
-    type: $ => choice(
-      prec(1, $.expression),
-      $.splat_type,
-      $.generic_type,
-      $.union_type,
-      $.constrained_type,
-      $.member_type,
+    // MYTH ADD ONS Types
+
+    type : $=> seq (
+      $.type_name,
+      optional($.type_arguments),
+      optional($.type_refinement)
     ),
+
+    // type start upper case always
+    type_name: _ =>  /[A-Z][_\p{XID_Continue}]*/,
+
+    // types can receive types as arguments
+    // List(Int : Type) creates a type that corresponds to a List of Intergers
+    // but can also receive proper numbers (that change the refinement)
+    // ListGreaterX(A: Type, int: x) = List(A){self[i]>x}
+    type_arguments: $=> seq(
+       field('parameters', $.parameters)
+    ),
+
+
+    type_refinement: $=> seq(
+      '{',
+      field('refinement', $.expression),
+      '}'
+    ),
+
+    // MYTH END ADD ONS
+
     splat_type: $ => prec(1, seq(choice('*', '**'), $.identifier)),
     generic_type: $ => prec(1, seq(
       choice(

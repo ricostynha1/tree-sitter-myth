@@ -1,5 +1,4 @@
 {
-  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "python",
   "word": "identifier",
   "rules": {
@@ -4785,35 +4784,73 @@
       }
     },
     "type": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
+          "type": "SYMBOL",
+          "name": "type_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_arguments"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_refinement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "type_name": {
+      "type": "PATTERN",
+      "value": "[A-Z][_\\p{XID_Continue}]*"
+    },
+    "type_arguments": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "parameters",
+          "content": {
+            "type": "SYMBOL",
+            "name": "parameters"
+          }
+        }
+      ]
+    },
+    "type_refinement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "FIELD",
+          "name": "refinement",
           "content": {
             "type": "SYMBOL",
             "name": "expression"
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "splat_type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "generic_type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "union_type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "constrained_type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "member_type"
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
@@ -6259,10 +6296,6 @@
     ],
     [
       "print_statement",
-      "primary_expression"
-    ],
-    [
-      "type_alias_statement",
       "primary_expression"
     ],
     [

@@ -665,22 +665,19 @@ async def c(d):
 async def g(g, h,):
   i
 
-async def c(a: str):
+async def c(a: Str):
   a
 
-async def c(a: b.c):
-  a
-
-async def d(a: Sequence[T]) -> T:
+async def d(a: Sequence(T)) -> T:
   a
 
 async def i(a, b=c, *c, **d):
   a
 
-async def d(a: str) -> None:
+async def d(a: Str) -> None:
   return None
 
-async def d(a:str="default", b=c) -> None:
+async def d(a:Str="default", b=c) -> None:
   return None
 
 --------------------------------------------------------------------------------
@@ -713,7 +710,7 @@ async def d(a:str="default", b=c) -> None:
       (typed_parameter
         (identifier)
         type: (type
-          (identifier))))
+          (type_name))))
     body: (block
       (expression_statement
         (identifier))))
@@ -723,9 +720,10 @@ async def d(a:str="default", b=c) -> None:
       (typed_parameter
         (identifier)
         type: (type
-          (attribute
-            object: (identifier)
-            attribute: (identifier)))))
+            (type_name)
+            (type_arguments
+                parameters: (parameters
+                  (identifier))))))
     body: (block
       (expression_statement
         (identifier))))
@@ -798,10 +796,10 @@ Function definitions
 def e((a,b)):
   return (a,b)
 
-def e(*list: str):
+def e(*list: Str):
   pass
 
-def e(**list: str):
+def e(**list: Str):
   pass
 
 def f():
@@ -840,7 +838,7 @@ def foo():
         (list_splat_pattern
           (identifier))
         type: (type
-          (identifier))))
+          (type_name))))
     body: (block
       (pass_statement)))
   (function_definition
@@ -850,7 +848,8 @@ def foo():
         (dictionary_splat_pattern
           (identifier))
         type: (type
-          (identifier))))
+          (type_name))))
+
     body: (block
       (pass_statement)))
   (function_definition

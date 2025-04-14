@@ -1142,21 +1142,6 @@
     }
   },
   {
-    "type": "constrained_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "continue_statement",
     "named": true,
     "fields": {}
@@ -1899,25 +1884,6 @@
     }
   },
   {
-    "type": "generic_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "global_statement",
     "named": true,
     "fields": {},
@@ -2409,28 +2375,8 @@
     }
   },
   {
-    "type": "member_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "module",
     "named": true,
-    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -2803,21 +2749,6 @@
     }
   },
   {
-    "type": "splat_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "string",
     "named": true,
     "fields": {},
@@ -2982,31 +2913,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "constrained_type",
+          "type": "type_arguments",
           "named": true
         },
         {
-          "type": "expression",
+          "type": "type_name",
           "named": true
         },
         {
-          "type": "generic_type",
-          "named": true
-        },
-        {
-          "type": "member_type",
-          "named": true
-        },
-        {
-          "type": "splat_type",
-          "named": true
-        },
-        {
-          "type": "union_type",
+          "type": "type_refinement",
           "named": true
         }
       ]
@@ -3039,6 +2958,22 @@
     }
   },
   {
+    "type": "type_arguments",
+    "named": true,
+    "fields": {
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameters",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "type_parameter",
     "named": true,
     "fields": {},
@@ -3051,6 +2986,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "type_refinement",
+    "named": true,
+    "fields": {
+      "refinement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3223,21 +3174,6 @@
         },
         {
           "type": "union_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "union_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type",
           "named": true
         }
       ]
@@ -3517,10 +3453,6 @@
     "named": false
   },
   {
-    "type": "\\",
-    "named": false
-  },
-  {
     "type": "]",
     "named": false
   },
@@ -3734,6 +3666,10 @@
   },
   {
     "type": "type_conversion",
+    "named": true
+  },
+  {
+    "type": "type_name",
     "named": true
   },
   {

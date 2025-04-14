@@ -1194,37 +1194,3 @@ match(r1, r2, r3)
         (identifier)
         (identifier)
         (identifier)))))
-
-================================================================================
-Type expressions
-================================================================================
-
-a: A[T] | B
-y: type[int] = int
-
---------------------------------------------------------------------------------
-
-(module
-  (expression_statement
-    (assignment
-      (identifier)
-      (type
-        (union_type
-          (type
-            (generic_type
-              (identifier)
-              (type_parameter
-                (type
-                  (identifier)))))
-          (type
-            (identifier))))))
-  (expression_statement
-    (assignment
-      (identifier)
-      (type
-        (generic_type
-          (identifier)
-          (type_parameter
-            (type
-              (identifier)))))
-      (identifier))))
